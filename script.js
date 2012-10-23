@@ -2,9 +2,7 @@ $ ->
   $('#btn').on 'click', ->
     alert $('#txt').val()
 
-###
-IT'S PRETTY COOL :-P
-###
+
 coffee_draw = (p5) ->
   x = 20
   y = 201
