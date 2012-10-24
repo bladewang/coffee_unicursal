@@ -39,5 +39,7 @@ coffee_draw = (p5) ->
 
 
 $(document).ready ->
-  canvas = document.getElementById "mycanvas"
-  processing = new Processing(canvas, coffee_draw)
+  processing = new Processing(
+    document.getElementById(
+      "mycanvas"), 
+    coffee_draw)
