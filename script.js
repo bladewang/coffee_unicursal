@@ -6,8 +6,8 @@ $ ->
 coffee_draw = (p5) ->
   x = 20
   y = 201
-  w = 240
-  h = 240
+  w = 480
+  h = 480
   speed = 3
   vx = speed
   vy = speed
