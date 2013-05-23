@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
   <title>$title</title>
-  $styles
+  <link rel="stylesheet" type="text/css" href="./style.css" />
 </head>
 <body>
   <canvas id="mycanvas"></canvas>
@@ -12,10 +12,13 @@
     <input type="text" id="txt" value="Hello, $title!" />
     <input type="button" id="btn" value="hello" />
   </p>
-  <script src="$ext/processing-1.4.1.min.js"></script>
-  <script src="$ext/underscore-min.js"></script>
+  <script src="./ext/jquery-1.9.1.min.js"></script>
+  <script src="./ext/processing-1.4.1.min.js"></script>
+  <script src="./ext/underscore-min.js"></script>
+  <script src="./ext/coffee-script.js"></script>
 
-  $scripts
+  <script type="text/coffeescript" src="./script.js">
+  </script>
 
 </body>
 </html>
