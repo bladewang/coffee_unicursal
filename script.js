@@ -36,10 +36,6 @@ coffee_draw = (pl, delay_factor=0.3) ->
       p5.setup = ->
         @size w, h
         @noStroke()
-        "
-        @fill 153
-        @rect 0, 0, 30, 30
-        "
         @background 125
 
       p5.draw = ->
