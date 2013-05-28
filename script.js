@@ -11,9 +11,9 @@ $ ->
     processing = new Processing(
       document.getElementById(
         "mycanvas"), 
-      coffee_draw(JSON.parse(data_str)))
+      coffee_draw(JSON.parse(data_str), 0.1))
 
-coffee_draw = (pl) ->
+coffee_draw = (pl, delay_factor=0.3) ->
   (p5) ->
       w = 480
       h = 480
@@ -29,7 +29,7 @@ coffee_draw = (pl) ->
 
       delay_to_p = (x, y, tp_x, tp_y) ->
         pw = Math.pow
-        0.3 * parseInt(
+        delay_factor * parseInt(
           Math.sqrt (
             pw((tp_x - x), 2) + pw((tp_y - y), 2)))
 
