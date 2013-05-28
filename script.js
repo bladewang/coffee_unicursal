@@ -11,8 +11,20 @@ coffee_draw = (p5) ->
   vy = speed
   
   point_list = [
-    [64, 94], [140, 130], [150,50],
-    [0, 480], [20,30], [30, 20], [360, 200]]
+    [240, 240],
+    [220, 240],
+    [220, 240],
+    [220, 220],
+    [260, 220],
+    [260, 260],
+    [180, 260],
+    [180, 180],
+    [300, 180],
+    [300, 300],
+    [140, 300],
+    [140, 140],
+    [300, 140],
+    ]
 
   point_idx = 0
   delay = 0
@@ -40,7 +52,7 @@ coffee_draw = (p5) ->
     @fill 200
     @text "Hello World! #{x} #{y}", 20 , 20
 
-    while delay is 0
+    while delay <= 0
       point_idx += 1
       [tp_x, tp_y] = point_list[point_idx]
       delay = delay_to_p(x, y, tp_x, tp_y) 
@@ -50,8 +62,8 @@ coffee_draw = (p5) ->
 
     delay -= 1
 
-    x = parseInt x
-    y = parseInt y
+    x = Math.round x
+    y = Math.round y
 
     @ellipse x, y, 10, 10
 
