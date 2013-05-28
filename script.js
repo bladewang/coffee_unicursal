@@ -11,7 +11,7 @@ $ ->
     processing = new Processing(
       document.getElementById(
         "mycanvas"), 
-      coffee_draw(JSON.parse(data_str), 0.1))
+      coffee_draw(JSON.parse(data_str), 0.2))
 
 coffee_draw = (pl, delay_factor=0.3) ->
   (p5) ->
@@ -49,6 +49,7 @@ coffee_draw = (pl, delay_factor=0.3) ->
           [tp_x, tp_y] = point_list[point_idx]
           delay = delay_to_p(x, y, tp_x, tp_y) 
 
+        [od_x, od_y] = [x, y]
         x += (tp_x - x) / delay
         y += (tp_y - y) / delay
 
@@ -56,7 +57,9 @@ coffee_draw = (pl, delay_factor=0.3) ->
 
         x = Math.round x
         y = Math.round y
-
-        @ellipse x, y, 10, 10
-
+        
+        @stroke(200)
+        @strokeWeight(10);
+        @strokeCap(p5.ROUND);
+        @line od_x, od_y, x, y
 
