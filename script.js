@@ -2,6 +2,16 @@ $ ->
   $('#btn').on 'click', ->
     alert $('#txt').val()
 
+    delete processing 
+    
+    $('#mycanvas').remove()
+    $('body').prepend('<canvas id="mycanvas"></canvas>')
+
+    processing = new Processing(
+      document.getElementById(
+        "mycanvas"), 
+      coffee_draw)
+
 
 coffee_draw = (p5) ->
   w = 480
