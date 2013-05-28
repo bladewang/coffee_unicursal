@@ -33,7 +33,7 @@ coffee_draw = (p5) ->
 
   delay_to_p = (x, y, tp_x, tp_y) ->
     pw = Math.pow
-    parseInt(
+    0.3 * parseInt(
       Math.sqrt (
         pw((tp_x - x), 2) + pw((tp_y - y), 2)))
 
