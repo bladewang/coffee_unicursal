@@ -1,7 +1,6 @@
 $ ->
   $('#btn').on 'click', ->
     data_str = $('#data_str').val()
-    alert(data_str)
 
     delete processing 
     
@@ -39,10 +38,7 @@ coffee_draw = (pl, delay_factor=0.3) ->
         @background 125
 
       p5.draw = ->
-        @fill 153
-        @rect 20, 10, 130, 20
         @fill 200
-        @text "Hello World! #{x} #{y}", 20 , 20
 
         while delay <= 0
           point_idx += 1
