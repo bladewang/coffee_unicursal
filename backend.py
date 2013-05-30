@@ -1,7 +1,8 @@
 # coding: utf-8
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from json import dumps as json_dumps
+from json import loads as json_loads
 from solve_helper import gen_random_points
 
 app = Flask(__name__)
@@ -16,6 +17,22 @@ def hello_world():
             [300, 300], [140, 300], [140, 140],
             [300, 140],
             ]))
+
+@app.route('/solve_1st', methods=['POST', 'GET'])
+def solve_1st():
+    '''
+    >>> data_str 
+    [[0,0], [1,2], [3,4] ...]
+    '''
+    data_list = json_loads(request.form.get('data', ''))
+    off = 50
+    w = 50
+    return json_dumps([
+        [off + w, off],
+        [off + 2 * w, off + w],
+        [off + w, off + 2 * w],
+        [off, off + w],
+        [off + w, off]])
 
 
 @app.route('/rand_points/<int:width>/<int:height>/<int:count>')
