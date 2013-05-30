@@ -29,7 +29,7 @@ coffee_draw = (pl, delay_factor=0.3) ->
       point_idx = 0
       delay = 0
       [x, y] = point_list[0]
-      [tp_x, tp_y] = [0, 0]
+      [tp_x, tp_y] = [x, y]
 
       delay_to_p = (x, y, tp_x, tp_y) ->
         pw = Math.pow
