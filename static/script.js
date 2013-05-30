@@ -12,16 +12,38 @@ $ ->
   
   $('#btn_gen_points').on 'click', ->
     $.get '/rand_points/480/480/8', (data)->
-       data_str = $('#data_str').val(data)
+      data_str = $('#data_str').val(data)
+
+      clear
+      data_str = $('#data_str').val()
+      processing = new Processing($("#mycanvas")[0], 
+        coffee_points(
+          JSON.parse(data_str)))
+
+coffee_points = (point_list, delay_factor=0.3) ->
+  (p5) ->
+    w = 480
+    h = 480
+
+    p5.my_ellipse = (x, y, r1, r2, w=5) ->
+      @stroke(200, 0, 100)
+      @strokeWeight(w)
+      @ellipse x, y, r1, r2
+
+    p5.setup = ->
+      @size w, h
+      @noStroke()
+      @background 125
+
+      @my_ellipse point[0], point[1], 10, 10 for point in point_list
+      @noLoop
 
 
-
-coffee_draw = (pl, delay_factor=0.3) ->
+coffee_draw = (point_list, delay_factor=0.3) ->
   (p5) ->
     w = 480
     h = 480
     
-    point_list = pl
     point_idx = 0
     delay = 0
     [x, y] = point_list[0]
@@ -34,7 +56,7 @@ coffee_draw = (pl, delay_factor=0.3) ->
           pw((tp_x - x), 2) + pw((tp_y - y), 2)))
 
     p5.my_ellipse = (x, y, r1, r2, w=5) ->
-      @stroke(220, 0, 0)
+      @stroke(230, 0, 0)
       @strokeWeight(w)
       @ellipse x, y, r1, r2
 
@@ -50,11 +72,16 @@ coffee_draw = (pl, delay_factor=0.3) ->
       @noStroke()
       @background 125
 
+      $('#btn').attr('disabled', true)
+      $('#btn_gen_points').attr('disabled', true)
       @my_ellipse point[0], point[1], 10, 10 for point in point_list
 
     p5.draw = ->
 
       while delay <= 0
+        if (point_list.length - 1) is point_idx
+          $('#btn').attr('disabled', false)
+          $('#btn_gen_points').attr('disabled', false)
 
         @my_ellipse x, y, 10, 10
 
