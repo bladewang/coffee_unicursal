@@ -1,8 +1,8 @@
 # coding: utf-8
 
 from flask import Flask
-from json import dumps
-from random import randrange
+from json import dumps as json_dumps
+from solve_helper import gen_random_points
 
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ def hello_world():
 @app.route('/rand_points/<width>/<height>/<count>'):
 def rand_points(width=100, height=100, count=8):
     
-    return ...
+    return json_dumps(gen_random_points(width, height, count))
 
 
 if __name__ == '__main__':
