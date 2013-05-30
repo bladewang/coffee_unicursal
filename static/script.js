@@ -37,6 +37,18 @@ coffee_draw = (pl, delay_factor=0.3) ->
           Math.sqrt (
             pw((tp_x - x), 2) + pw((tp_y - y), 2)))
 
+      p5.my_ellipse = (x, y, r1, r2, w=5) ->
+        @stroke(200, 0, 0)
+        @strokeWeight(w)
+        @ellipse x, y, r1, r2
+
+      p5.my_line = (ox, oy, nx, ny) ->
+        @fill 200
+        @stroke(200)
+        @strokeWeight(5);
+        @strokeCap(p5.ROUND);
+        @line ox, oy, nx, ny
+
       p5.setup = ->
         @size w, h
         @noStroke()
@@ -46,9 +58,7 @@ coffee_draw = (pl, delay_factor=0.3) ->
 
         while delay <= 0
 
-          @stroke(200, 0, 0)
-          @strokeWeight(5)
-          @ellipse x, y, 10, 10
+          @my_ellipse x, y, 10, 10
 
           @fill 0, 50, 200
           @text "#{point_idx}: (#{tp_x}, #{tp_y})", x, y
@@ -63,9 +73,5 @@ coffee_draw = (pl, delay_factor=0.3) ->
 
         delay -= 1
         
-        @fill 200
-        @stroke(200)
-        @strokeWeight(5);
-        @strokeCap(p5.ROUND);
-        @line od_x, od_y, x, y
+        @my_line od_x, od_y, x, y
 
