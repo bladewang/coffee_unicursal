@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
   <title>a algorithm exercise</title>
-  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="./style.css") }}" />
 </head>
 <body>
   <canvas id="mycanvas"></canvas>
   <p>
     <input type="text" id="data_str" value="[[240, 240], [220, 240], [220, 240], [220, 220], [260, 220], [260, 260], [180, 260], [180, 180], [300, 180], [300, 300], [140, 300], [140, 140], [300, 140]]" />
     <input type="button" id="btn" value="draw" />
+    <input type="button" id="btn_gen_points" value="gen rand points" />
   </p>
   <script src="{{ url_for("static", filename="./ext/jquery-1.9.1.min.js") }}"></script>
   <script src="{{ url_for("static", filename="./ext/processing-1.4.1.min.js") }}"></script>

@@ -11,6 +11,11 @@ $ ->
       document.getElementById(
         "mycanvas"), 
       coffee_draw(JSON.parse(data_str), 0.2))
+  
+  $('#btn_gen_points').on 'click', ->
+    $.get '/rand_points/480/480/8', (data)->
+       data_str = $('#data_str').val(data)
+
 
 coffee_draw = (pl, delay_factor=0.3) ->
   (p5) ->
