@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>$title</title>
+  <title>a algorithm exercise</title>
   <link rel="stylesheet" type="text/css" href="./style.css" />
 </head>
 <body>
@@ -12,12 +12,12 @@
     <input type="text" id="data_str" value="[[240, 240], [220, 240], [220, 240], [220, 220], [260, 220], [260, 260], [180, 260], [180, 180], [300, 180], [300, 300], [140, 300], [140, 140], [300, 140]]" />
     <input type="button" id="btn" value="draw" />
   </p>
-  <script src="./ext/jquery-1.9.1.min.js"></script>
-  <script src="./ext/processing-1.4.1.min.js"></script>
-  <script src="./ext/underscore-min.js"></script>
-  <script src="./ext/coffee-script.js"></script>
+  <script src="{{ url_for("static", filename="./ext/jquery-1.9.1.min.js") }}"></script>
+  <script src="{{ url_for("static", filename="./ext/processing-1.4.1.min.js") }}"></script>
+  <script src="{{ url_for("static", filename="./ext/underscore-min.js") }}"></script>
+  <script src="{{ url_for("static", filename="./ext/coffee-script.js") }}"></script>
 
-  <script type="text/coffeescript" src="./script.js">
+  <script type="text/coffeescript" src="{{ url_for("static", filename="./script.js") }}">
   </script>
 
 </body>
