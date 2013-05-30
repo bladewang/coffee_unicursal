@@ -55,7 +55,7 @@ coffee_draw = (pl, delay_factor=0.3) ->
         y = Math.round y
         
         @stroke(200)
-        @strokeWeight(10);
+        @strokeWeight(5);
         @strokeCap(p5.ROUND);
         @line od_x, od_y, x, y
 
