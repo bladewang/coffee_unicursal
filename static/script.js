@@ -25,7 +25,7 @@ coffee_points = (point_list, delay_factor=0.3) ->
     h = 480
 
     p5.my_ellipse = (x, y, r1, r2, w=5) ->
-      @stroke(200, 0, 100)
+      @stroke(180, 0, 90)
       @strokeWeight(w)
       @ellipse x, y, r1, r2
 
@@ -73,7 +73,7 @@ coffee_draw = (point_list, delay_factor=0.3) ->
 
       $('#btn').attr('disabled', true)
       $('#btn_gen_points').attr('disabled', true)
-      @my_ellipse point[0], point[1], 10, 10, 5, @color(200, 0, 100) for point in point_list
+      @my_ellipse point[0], point[1], 10, 10, 5, @color(180, 0, 90) for point in point_list
 
     p5.draw = ->
 
@@ -105,3 +105,4 @@ $(document).ready ->
   processing = new Processing($("#mycanvas")[0], 
     coffee_points(
       JSON.parse(data_str)))
+
