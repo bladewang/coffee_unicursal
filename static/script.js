@@ -15,10 +15,9 @@ $ ->
       data_str = $('#data_str').val(data)
 
       clear
-      data_str = $('#data_str').val()
       processing = new Processing($("#mycanvas")[0], 
         coffee_points(
-          JSON.parse(data_str)))
+          JSON.parse(data)))
 
 coffee_points = (point_list, delay_factor=0.3) ->
   (p5) ->
@@ -101,3 +100,8 @@ coffee_draw = (point_list, delay_factor=0.3) ->
       
       @my_line od_x, od_y, x, y
 
+$(document).ready ->
+  data_str = $('#data_str').val()
+  processing = new Processing($("#mycanvas")[0], 
+    coffee_points(
+      JSON.parse(data_str)))
