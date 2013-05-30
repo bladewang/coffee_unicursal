@@ -55,8 +55,8 @@ coffee_draw = (point_list, delay_factor=0.3) ->
         Math.sqrt (
           pw((tp_x - x), 2) + pw((tp_y - y), 2)))
 
-    p5.my_ellipse = (x, y, r1, r2, w=5) ->
-      @stroke(230, 0, 0)
+    p5.my_ellipse = (x, y, r1, r2, w=5, p_color=@color(230, 0, 0)) ->
+      @stroke(p_color)
       @strokeWeight(w)
       @ellipse x, y, r1, r2
 
@@ -74,7 +74,7 @@ coffee_draw = (point_list, delay_factor=0.3) ->
 
       $('#btn').attr('disabled', true)
       $('#btn_gen_points').attr('disabled', true)
-      @my_ellipse point[0], point[1], 10, 10 for point in point_list
+      @my_ellipse point[0], point[1], 10, 10, 5, @color(200, 0, 100) for point in point_list
 
     p5.draw = ->
 
@@ -83,7 +83,8 @@ coffee_draw = (point_list, delay_factor=0.3) ->
           $('#btn').attr('disabled', false)
           $('#btn_gen_points').attr('disabled', false)
 
-        @my_ellipse x, y, 10, 10
+        [tp_x, tp_y] = point_list[point_idx]
+        @my_ellipse tp_x, tp_y, 10, 10
 
         @fill 0, 50, 200
         @text "#{point_idx}: (#{tp_x}, #{tp_y})", x, y
