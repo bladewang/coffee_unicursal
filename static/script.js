@@ -54,6 +54,8 @@ coffee_draw = (pl, delay_factor=0.3) ->
         @noStroke()
         @background 125
 
+        @my_ellipse point[0], point[1], 10, 10 for point in point_list
+
       p5.draw = ->
 
         while delay <= 0
