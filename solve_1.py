@@ -1,7 +1,5 @@
 # coding: utf-8
 
-from itertools import permutations
-from random import randrange
 from math import sqrt
 
 
@@ -18,10 +16,9 @@ def cmp_lsum(a, b):
 
 if __name__ == '__main__':
 
-    pl = list(permutations([
-        (randrange(100), randrange(100))
-        for x in xrange(4)
-        ]))
+    from solve_helper import gen_random_points
+
+    pl = gen_random_points(100, 100, 4)
 
     spl = sorted(pl, cmp=cmp_lsum)
 
