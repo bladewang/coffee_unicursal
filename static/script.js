@@ -21,9 +21,6 @@ coffee_draw = (pl, delay_factor=0.3) ->
   (p5) ->
     w = 480
     h = 480
-    speed = 3
-    vx = speed
-    vy = speed
     
     point_list = pl
     point_idx = 0
