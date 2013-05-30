@@ -7,9 +7,7 @@ $ ->
     $('#mycanvas').remove()
     $('body').prepend('<canvas id="mycanvas"></canvas>')
 
-    processing = new Processing(
-      document.getElementById(
-        "mycanvas"), 
+    processing = new Processing($("#mycanvas")[0], 
       coffee_draw(JSON.parse(data_str), 0.2))
   
   $('#btn_gen_points').on 'click', ->
