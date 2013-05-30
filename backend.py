@@ -8,7 +8,14 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html')
+    return render_template('index.html',
+        default_data=json_dumps([
+            [240, 240], [220, 240], [220, 240],
+            [220, 220], [260, 220], [260, 260],
+            [180, 260], [180, 180], [300, 180],
+            [300, 300], [140, 300], [140, 140],
+            [300, 140],
+            ]))
 
 
 @app.route('/rand_points/<int:width>/<int:height>/<int:count>')
