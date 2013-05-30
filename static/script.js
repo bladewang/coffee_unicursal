@@ -46,12 +46,14 @@ coffee_draw = (pl, delay_factor=0.3) ->
         @fill 200
 
         while delay <= 0
+
+          @stroke(200, 0, 0)
+          @strokeWeight(5)
+          @ellipse x, y, 10, 10
+
           point_idx += 1
           [tp_x, tp_y] = point_list[point_idx]
           delay = delay_to_p(x, y, tp_x, tp_y) 
-          @stroke(200, 0, 0)
-          @strokeWeight(1)
-          @ellipse x, y, 10, 10
 
         [od_x, od_y] = [x, y]
         x += (tp_x - x) / delay
