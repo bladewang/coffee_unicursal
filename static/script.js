@@ -1,18 +1,19 @@
 $ ->
-  $('#btn').on 'click', ->
-    data_str = $('#data_str').val()
-
+  clear = ->
     delete processing 
-    
     $('#mycanvas').remove()
     $('body').prepend('<canvas id="mycanvas"></canvas>')
 
+  $('#btn').on 'click', ->
+    data_str = $('#data_str').val()
+    clear
     processing = new Processing($("#mycanvas")[0], 
       coffee_draw(JSON.parse(data_str), 0.2))
   
   $('#btn_gen_points').on 'click', ->
     $.get '/rand_points/480/480/8', (data)->
        data_str = $('#data_str').val(data)
+
 
 
 coffee_draw = (pl, delay_factor=0.3) ->
@@ -33,7 +34,7 @@ coffee_draw = (pl, delay_factor=0.3) ->
           pw((tp_x - x), 2) + pw((tp_y - y), 2)))
 
     p5.my_ellipse = (x, y, r1, r2, w=5) ->
-      @stroke(200, 0, 0)
+      @stroke(220, 0, 0)
       @strokeWeight(w)
       @ellipse x, y, r1, r2
 
