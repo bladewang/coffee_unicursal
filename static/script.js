@@ -12,7 +12,8 @@ $ ->
   
   $('#btn_gen_points').on 'click', ->
     $.get '/rand_points/480/480/8', (data)->
-      data_str = $('#data_str').val(data)
+      $('#data_str').val(data)
+      $('#data_str_backup').text(data)
 
       clear
       processing = new Processing($("#mycanvas")[0], 
