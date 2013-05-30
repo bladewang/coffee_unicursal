@@ -43,13 +43,15 @@ coffee_draw = (pl, delay_factor=0.3) ->
         @background 125
 
       p5.draw = ->
-        @fill 200
 
         while delay <= 0
 
           @stroke(200, 0, 0)
           @strokeWeight(5)
           @ellipse x, y, 10, 10
+
+          @fill 0, 50, 200
+          @text "#{point_idx}: (#{tp_x}, #{tp_y})", x, y
 
           point_idx += 1
           [tp_x, tp_y] = point_list[point_idx]
@@ -61,6 +63,7 @@ coffee_draw = (pl, delay_factor=0.3) ->
 
         delay -= 1
         
+        @fill 200
         @stroke(200)
         @strokeWeight(5);
         @strokeCap(p5.ROUND);
