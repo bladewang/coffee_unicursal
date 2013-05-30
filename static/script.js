@@ -19,8 +19,10 @@ $ ->
       processing = new Processing($("#mycanvas")[0], 
         coffee_points(
           JSON.parse(data)))
+
   $('#btn_reset_data').on 'click', ->
     $('#data_str').val $('#data_str_backup').text()
+
 
 coffee_points = (point_list, delay_factor=0.3) ->
   (p5) ->
