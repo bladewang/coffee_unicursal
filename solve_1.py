@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     from solve_helper import gen_random_points
 
-    pl = gen_random_points(100, 100, 4)
+    pl = path_permutations(100, 100, 4)
 
     spl = sorted(pl, cmp=cmp_lsum)
 

@@ -6,11 +6,11 @@ from solve_helper import gen_random_points
 
 app = Flask(__name__)
 
-@app.route('/'):
+@app.route('/')
 def hello_world():
     return "hello_world"
 
-@app.route('/rand_points/<width>/<height>/<count>'):
+@app.route('/rand_points/<int:width>/<int:height>/<int:count>')
 def rand_points(width=100, height=100, count=8):
     
     return json_dumps(gen_random_points(width, height, count))
