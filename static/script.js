@@ -30,7 +30,11 @@ $ ->
   $('#btn_solve_1').on 'click', ->
     $.post(
       '/solve_1st',
-      {"data": $('#data_str').val()},
+      "data":
+        $('#data_str').val()
+      "l_bottom_pos":
+        [0, parseInt $('#canvas_height')]
+      ,
       (data) ->
         $('#data_str').val(data)
         processing = new Processing($("#mycanvas")[0], coffee_points( JSON.parse(data)))
