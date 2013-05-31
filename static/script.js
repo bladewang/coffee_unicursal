@@ -89,7 +89,7 @@ coffee_draw = (point_list, delay_factor=0.3) ->
       @noStroke()
       @background 125
 
-      $('input[type="button"]').attr('disabled', true)
+      $('input[type="button"]').attr 'disabled', true
 
       for point in point_list
         @my_ellipse point[0], point[1], 10, 10, 5, @color(180, 0, 90) 
@@ -98,7 +98,7 @@ coffee_draw = (point_list, delay_factor=0.3) ->
 
       while delay <= 0
         if (point_list.length - 1) is point_idx
-          $('input[type="button"]').attr('disabled', false)
+          $('input[type="button"]').attr 'disabled', false
 
         [tp_x, tp_y] = point_list[point_idx]
         @my_ellipse tp_x, tp_y, 10, 10
