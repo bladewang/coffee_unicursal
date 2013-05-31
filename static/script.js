@@ -42,6 +42,19 @@ $ ->
     )
     $('#btn').attr 'disabled', true
 
+  $('#btn_solve_2').on 'click', ->
+    $.post(
+      '/solve_2nd',
+      "data":
+        $('#data_str').val()
+      ,
+      (data) ->
+        $('#data_str').val(data)
+        processing = new Processing($("#mycanvas")[0], coffee_points( JSON.parse(data)))
+        $('#btn').attr 'disabled', false
+    )
+    $('#btn').attr 'disabled', true
+
 
 coffee_points = (point_list, delay_factor=0.3) ->
   (p5) ->
