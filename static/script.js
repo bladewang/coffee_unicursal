@@ -41,8 +41,8 @@ $ ->
 
 coffee_points = (point_list, delay_factor=0.3) ->
   (p5) ->
-    w = 480
-    h = 480
+    w = parseInt $('#canvas_width').text()
+    h = parseInt $('#canvas_height').text()
 
     p5.my_ellipse = (x, y, r1, r2, w=5) ->
       @stroke(180, 0, 90)

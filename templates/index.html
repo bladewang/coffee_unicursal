@@ -16,6 +16,8 @@
     <input type="button" id="btn_solve_2" value="solve 2nd question" />
     <input type="button" id="btn_reset_data" value="reset data to unsolve" />
     <span style="display:none" id="data_str_backup">{{ default_data }}</span>
+    <span style="display:none" id="canvas_width">{{ canv_width }}</span>
+    <span style="display:none" id="canvas_height">{{ canv_height }}</span>
   </p>
   <script src="{{ url_for("static", filename="./ext/jquery-1.9.1.min.js") }}"></script>
   <script src="{{ url_for("static", filename="./ext/processing-1.4.1.min.js") }}"></script>

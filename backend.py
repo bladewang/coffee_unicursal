@@ -13,6 +13,8 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     return render_template('index.html',
+        canv_width=480,
+        canv_height=480,
         default_data=json_dumps([
             [240, 240], [220, 240], [220, 240],
             [220, 220], [260, 220], [260, 260],
