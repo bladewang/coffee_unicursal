@@ -30,7 +30,7 @@ $ ->
   $('#btn_solve_1').on 'click', ->
     $.post(
       '/solve_1st',
-      {"data": $('#data_str:first').text()},
+      {"data": $('#data_str').val()},
       (data) ->
         $('#data_str').val(data)
         processing = new Processing($("#mycanvas")[0], coffee_points( JSON.parse(data)))

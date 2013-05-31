@@ -5,6 +5,9 @@ from json import dumps as json_dumps
 from json import loads as json_loads
 from solve_helper import gen_random_points
 
+from solve_helper import path_permutations
+from solve_1 import cmp_lsum
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -24,15 +27,24 @@ def solve_1st():
     >>> data_str 
     [[0,0], [1,2], [3,4] ...]
     '''
-    data_list = json_loads(request.form.get('data', ''))
-    off = 50
-    w = 50
-    return json_dumps([
-        [off + w, off],
-        [off + 2 * w, off + w],
-        [off + w, off + 2 * w],
-        [off, off + w],
-        [off + w, off]])
+    try:
+        return json_dumps(sorted(
+            path_permutations(
+                json_loads(
+                    request.form.get('data', '')
+                )[:8]
+            ),
+            cmp_lsum)[0])
+
+    except: #FIXME: fix type of except
+        off = 50
+        w = 50
+        return json_dumps([
+            [off + w, off],
+            [off + 2 * w, off + w],
+            [off + w, off + 2 * w],
+            [off, off + w],
+            [off + w, off]])
 
 
 @app.route('/rand_points/<int:width>/<int:height>/<int:count>')
