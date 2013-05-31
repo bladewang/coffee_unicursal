@@ -29,10 +29,10 @@ def solve_1st(point_list, l_bottom):
             sqrt((x - lbx) ** 2 + (y - lby) ** 2)
         )
     point_list.remove(new_list_head)
-    return (new_list_head,) + sorted(
+    return (new_list_head,) + min(
         path_permutations(point_list),
-        cmp=cmp_lsum,
-        )[0]
+        key=lsum,
+        )
 
 
 if __name__ == '__main__':
