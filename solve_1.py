@@ -2,6 +2,8 @@
 
 from math import sqrt
 
+from solve_helper import gen_random_points, path_permutations
+
 
 def lsum(l):
     return reduce(lambda (lsm, (a, b)), (c, d):
@@ -34,8 +36,6 @@ def solve_1st(point_list, l_bottom):
 
 
 if __name__ == '__main__':
-
-    from solve_helper import gen_random_points, path_permutations
 
     pl = path_permutations(gen_random_points(100, 100, 5))
 

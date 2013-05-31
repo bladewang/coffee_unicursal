@@ -32,8 +32,8 @@ $ ->
       '/solve_1st',
       "data":
         $('#data_str').val()
-      "l_bottom_pos":
-        [0, parseInt $('#canvas_height')]
+      "lb_pos":
+        JSON.stringify [0, parseInt $('#canvas_height').text()]
       ,
       (data) ->
         $('#data_str').val(data)

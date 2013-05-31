@@ -5,8 +5,7 @@ from json import dumps as json_dumps
 from json import loads as json_loads
 from solve_helper import gen_random_points
 
-from solve_helper import path_permutations
-from solve_1 import cmp_lsum
+from solve_1 import solve_1st
 
 app = Flask(__name__)
 
@@ -24,20 +23,17 @@ def hello_world():
             ]))
 
 @app.route('/solve_1st', methods=['POST', 'GET'])
-def solve_1st():
+def uri_solve_1st():
     '''
     >>> data_str 
     [[0,0], [1,2], [3,4] ...]
     '''
     try:
-        return json_dumps(sorted(
-            path_permutations(
-                json_loads(
-                    request.form.get('data', '')
-                )[:8]
-            ),
-            cmp_lsum)[0])
-
+        plist = json_loads(request.form.get('data'))[:8]
+        lbpos = json_loads(request.form.get('lb_pos'))
+        print plist
+        print lbpos
+        return json_dumps(solve_1st(plist, lbpos))
     except: #FIXME: fix type of except
         off = 50
         w = 50
