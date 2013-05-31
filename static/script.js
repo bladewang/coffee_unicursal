@@ -34,7 +34,9 @@ $ ->
       (data) ->
         $('#data_str').val(data)
         processing = new Processing($("#mycanvas")[0], coffee_points( JSON.parse(data)))
+        $('#btn').attr 'disabled', false
     )
+    $('#btn').attr 'disabled', true
 
 
 coffee_points = (point_list, delay_factor=0.3) ->
