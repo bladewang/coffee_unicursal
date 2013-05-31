@@ -60,8 +60,8 @@ coffee_points = (point_list, delay_factor=0.3) ->
 
 coffee_draw = (point_list, delay_factor=0.3) ->
   (p5) ->
-    w = 480
-    h = 480
+    w = parseInt $('#canvas_width').text()
+    h = parseInt $('#canvas_height').text()
     
     point_idx = 0
     delay = 0
