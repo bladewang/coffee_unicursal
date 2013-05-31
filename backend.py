@@ -73,4 +73,4 @@ def rand_points(width=100, height=100, count=8):
 
 
 if __name__ == '__main__':
-    app.run(host="10.237.93.35", debug=True)
+    app.run(debug=True)
