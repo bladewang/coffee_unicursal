@@ -34,16 +34,24 @@ def solve_1st(point_list, l_bottom):
         key=lsum,
         )
 
+def solve_2nd(point_list):
+    '''
+    point_list : [[0,0], [1,2], [3,4]...]
+    '''
+    return min(
+        path_permutations(point_list),
+        key=lsum,
+        )
+
 
 if __name__ == '__main__':
 
-    pl = path_permutations(gen_random_points(100, 100, 5))
-
-    spl = sorted(pl, cmp=cmp_lsum)
+    pl = gen_random_points(100, 100, 9)
 
     print pl
-    print 'sorted:' 
-    print spl[0]
    
     print 'solve_1st:' 
-    print solve_1st(list(spl[0]), (0, 0))
+    print solve_1st(pl, (0, 0))
+
+    print 'solve_2nd:' 
+    print solve_2nd(pl)
