@@ -39,6 +39,13 @@ def solve_2nd(point_list):
         key=lsum,
         )
 
+def solve_by_mst(mst, prim_point=None):
+    if prim_point:
+        pass
+    else:
+        pass
+    return []
+
 
 if __name__ == '__main__':
 
