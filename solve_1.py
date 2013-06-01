@@ -12,10 +12,6 @@ def lsum(l):
         (0, (0, 0)))[0]
 
 
-def cmp_lsum(a, b):
-    return cmp(lsum(a), lsum(b))
-
-
 def solve_1st(point_list, l_bottom):
     '''
     point_list : [[0,0], [1,2], [3,4]...]
