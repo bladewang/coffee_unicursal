@@ -6,19 +6,24 @@
   <title>a algorithm exercise</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="./style.css") }}" />
 </head>
-<body>
+<body align="center">
   <canvas id="mycanvas"></canvas>
-  <p>
+  <div>
     <textarea style="resize:none" id="data_str" rows="3" cols="64"> {{ default_data }} </textarea>
+  </div>
+  <div>
     <input type="button" id="btn" value="draw" />
     <input type="button" id="btn_gen_points" value="gen rand points" />
+    <input type="button" id="btn_reset_data" value="reset data to unsolve" />
+  </div>
+  <div>
     <input type="button" id="btn_solve_1" value="solve 1st question" />
     <input type="button" id="btn_solve_2" value="solve 2nd question" />
-    <input type="button" id="btn_reset_data" value="reset data to unsolve" />
-    <span style="display:none" id="data_str_backup">{{ default_data }}</span>
-    <span style="display:none" id="canvas_width">{{ canv_width }}</span>
-    <span style="display:none" id="canvas_height">{{ canv_height }}</span>
-  </p>
+  </div>
+  <span style="display:none" id="data_str_backup">{{ default_data }}</span>
+  <span style="display:none" id="canvas_width">{{ canv_width }}</span>
+  <span style="display:none" id="canvas_height">{{ canv_height }}</span>
+
   <script src="{{ url_for("static", filename="./ext/jquery-1.9.1.min.js") }}"></script>
   <script src="{{ url_for("static", filename="./ext/processing-1.4.1.min.js") }}"></script>
   <script src="{{ url_for("static", filename="./ext/underscore-min.js") }}"></script>
