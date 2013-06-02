@@ -1,3 +1,4 @@
+# coding: utf-8
 
 from math import sqrt
 from itertools import combinations
@@ -30,24 +31,42 @@ def mst(edge_list):
         ...
         ]
     '''
+
+    unions = {} # 在拼凑 mst 的过程中，保存各个联通分量。
+
+    def union_find(point):
+        for (union_id, points) in unions.items():
+            if  (point in points):
+                return union_id
+            else:
+                continue
+        return point
+
+    def is_connected(point1, point2):
+        return union_find(point1) == union_find(point2)
+
+    def update_union(p1, p2):
+        uid_p1 = union_find(p1)
+        uid_p2 = union_find(p2)
+        if unions.get(uid_p1) and unions.get(uid_p2):
+            unions[uid_p1].update(unions.pop(uid_p2))
+        else:
+            (union_id, new_point) = (uid_p1 in unions) and (uid_p1, p2) or (uid_p2, p1)
+            unions.setdefault(union_id, set([union_id])).add(new_point)
+    
     edge_list = edge_list[:]    # or mst() while clear argement edge_list after calculate.
     edge_list.sort(key=lambda (e, el): el)
     edge_list.reverse()
    
     mst = []
     
-    p_in_mst = set()
-
     while edge_list:
         (e, el) = edge_list.pop()
         (p1, p2) = e
-        if all((
-            p1 in p_in_mst,
-            p2 in p_in_mst,
-        )):
+        if is_connected(p1, p2):
             continue
         else:
             mst.append(e)
-            p_in_mst.update(e)
+            update_union(p1, p2)
 
     return mst

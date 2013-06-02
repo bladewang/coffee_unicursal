@@ -55,6 +55,17 @@ $ ->
     )
     $('#btn').attr 'disabled', true
 
+  $('#btn_draw_mst').on 'click', ->
+    $.post(
+      '/mst',
+      "data":
+        $('#data_str').val()
+      ,
+      (data) -> 
+        processing = new Processing($("#mycanvas")[0],
+          coffee_mst(JSON.parse(data)))
+    )
+
 
 coffee_points = (point_list, delay_factor=0.3) ->
   (p5) ->
@@ -72,6 +83,37 @@ coffee_points = (point_list, delay_factor=0.3) ->
       @background 125
 
       @my_ellipse point[0], point[1], 10, 10 for point in point_list
+      @noLoop
+
+
+coffee_mst = (edge_list) ->
+  (p5) -> 
+    w = parseInt $('#canvas_width').text()
+    h = parseInt $('#canvas_height').text()
+
+    p5.my_line = (ox, oy, nx, ny) ->
+      @fill 200
+      @stroke(200)
+      @strokeWeight(5);
+      @strokeCap(p5.ROUND);
+      @line ox, oy, nx, ny
+
+    p5.my_ellipse = (x, y, r1, r2, w=5) ->
+      @stroke(180, 0, 90)
+      @strokeWeight(w)
+      @ellipse x, y, r1, r2
+  
+    p5.setup = ->
+      @size w, h
+      @noStroke()
+      @background 125
+  
+      for edge in edge_list
+        for point in edge
+          @my_ellipse point[0], point[1], 10, 10
+        [[x1, y1], [x2, y2]] = edge
+        @my_line x1, (y1 - 1), x2, (y2 - 1)
+
       @noLoop
 
 

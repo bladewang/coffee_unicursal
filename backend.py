@@ -6,6 +6,7 @@ from json import loads as json_loads
 from solve_helper import gen_random_points
 
 from solve_1 import solve_1st, solve_2nd
+import mst
 
 app = Flask(__name__)
 
@@ -64,6 +65,16 @@ def uri_solve_2nd():
     
     except: #FIXME: fix type of except
         erro_screen_points()
+
+
+@app.route('/mst', methods=['POST', 'GET'])
+def get_mst():
+
+    points = map(tuple, json_loads(request.form.get('data')))
+
+    return json_dumps(
+        mst.mst(
+            mst.fullmap_of_pointslist(points)))
 
 
 @app.route('/rand_points/<int:width>/<int:height>/<int:count>')
