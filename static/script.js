@@ -67,10 +67,11 @@ $ ->
     )
 
 
+w = parseInt $('#canvas_width').text()
+h = parseInt $('#canvas_height').text()
+
 coffee_points = (point_list, delay_factor=0.3) ->
   (p5) ->
-    w = parseInt $('#canvas_width').text()
-    h = parseInt $('#canvas_height').text()
 
     p5.my_ellipse = (x, y, r1, r2, w=5) ->
       @stroke(180, 0, 90)
@@ -88,8 +89,6 @@ coffee_points = (point_list, delay_factor=0.3) ->
 
 coffee_mst = (edge_list) ->
   (p5) -> 
-    w = parseInt $('#canvas_width').text()
-    h = parseInt $('#canvas_height').text()
 
     p5.my_line = (ox, oy, nx, ny) ->
       @fill 200
@@ -119,8 +118,6 @@ coffee_mst = (edge_list) ->
 
 coffee_draw = (point_list, delay_factor=0.3) ->
   (p5) ->
-    w = parseInt $('#canvas_width').text()
-    h = parseInt $('#canvas_height').text()
     
     point_idx = 0
     delay = 0
