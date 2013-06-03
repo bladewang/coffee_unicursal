@@ -8,7 +8,7 @@ $ ->
     data_str = $('#data_str').val()
     clear
     processing = new Processing($("#mycanvas")[0], 
-      coffee_draw(JSON.parse(data_str), 0.2))
+      path_animation_creator(JSON.parse(data_str), 0.2))
   
   $('#btn_gen_points').on 'click', ->
     $.get '/rand_points/480/480/8', (data)->
@@ -86,8 +86,8 @@ class stop_after_draw_p
     @noStroke
     @background 125
 
-  my_ellipse: (x, y, r1, r2, wght=5) ->
-    @stroke @p_color
+  my_ellipse: (x, y, r1, r2, wght=5, ecolor=undefined) ->
+    @stroke (if ecolor? then ecolor else @p_color)
     @strokeWeight wght
     @ellipse x, y, r1, r2
 
@@ -178,12 +178,12 @@ class path_animation extends stop_after_draw_p_l
     @my_line od_x, od_y, @_cx, @_cy
 
 
-coffee_draw = (point_list, delay_factor=0.3) ->
+path_animation_creator = (point_list, delay_factor=0.3) ->
   (p5) ->
     extend p5, (new path_animation(
         point_list,
         [],
-        p5.color(180, 0, 90))) 
+        p5.color(230, 0, 0))) 
 
 
 $(document).ready ->
