@@ -138,7 +138,7 @@ coffee_draw = (point_list, delay_factor=0.3) ->
   (p5) ->
     
     point_idx = 0
-    delay = 0
+    _c_steps = 0
     [_cx, _cy] = point_list[0]
     [tp_x, tp_y] = [_cx, _cy]
 
@@ -172,7 +172,7 @@ coffee_draw = (point_list, delay_factor=0.3) ->
 
     p5.draw = ->
 
-      while delay <= 0
+      while _c_steps <= 0
         if (point_list.length - 1) is point_idx
           $('input[type="button"]').attr 'disabled', false
 
@@ -184,13 +184,13 @@ coffee_draw = (point_list, delay_factor=0.3) ->
 
         point_idx += 1
         [tp_x, tp_y] = point_list[point_idx]
-        delay = delay_to_p(_cx, _cy, tp_x, tp_y) 
+        _c_steps = delay_to_p(_cx, _cy, tp_x, tp_y) 
 
       [od_x, od_y] = [_cx, _cy]
-      _cx += (tp_x - _cx) / delay
-      _cy += (tp_y - _cy) / delay
+      _cx += (tp_x - _cx) / _c_steps
+      _cy += (tp_y - _cy) / _c_steps
 
-      delay -= 1
+      _c_steps -= 1
       
       @my_line od_x, od_y, _cx, _cy
 
