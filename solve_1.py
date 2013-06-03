@@ -6,10 +6,16 @@ from solve_helper import gen_random_points, path_permutations
 
 
 def lsum(l):
-    return reduce(lambda (lsm, (a, b)), (c, d):
-        (lsm + sqrt((a - c)**2 + (b - d)**2), (c, d)),
-        l,
-        (0, (0, 0)))[0]
+    path_length = 0
+    last_point = None
+    for (nx, ny) in l:
+        if last_point:
+            (ox, oy) = last_point
+            path_length += sqrt((nx - ox) ** 2 + (ny - oy) ** 2)
+        else:
+            pass
+        last_point = (nx, ny)
+    return path_length
 
 
 def solve_1st(point_list, l_bottom):
@@ -34,8 +40,8 @@ def solve_2nd(point_list):
     '''
     point_list : [[0,0], [1,2], [3,4]...]
     #FIXME:
-        [[69, 201], [100, 317], [111, 341], [149, 467], [177, 426], [403, 223], [387, 88], [270, 98]] 与MST的结果不一样啊。
-        [[84, 139], [41, 236], [36, 332], [98, 382], [204, 423], [261, 286], [301, 300], [319, 253]] 与MST的结果一样。 
+        [[69, 201], [100, 317], [111, 341], [149, 467], [177, 426], [403, 223], [387, 88], [270, 98]]
+        与MST的结果不一样啊。
     '''
     return min(
         path_permutations(point_list),
