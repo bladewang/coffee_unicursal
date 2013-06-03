@@ -79,9 +79,8 @@ extend = (obj, mixin) ->
 
 class graph_canvas
   constructor: (@p_color) ->
-    @setup
 
-  setup:  ->
+  canvas_setup: ->
     @size canvas_width, canvas_height
     @noStroke
     @background 125
@@ -92,51 +91,52 @@ class graph_canvas
     @ellipse x, y, r1, r2
 
 
-class points_minxin extends graph_canvas
+class stop_after_draw_p extends graph_canvas
 
   constructor: (@point_list, @p_color) ->
-    super(@p_color)
+    super @p_color
 
   setup: ->
-    super()
-
-    @my_ellipse point[0], point[1], 10, 10 for point in @point_list
+    @canvas_setup()
+    for [x, y] in @point_list
+      @my_ellipse x, y, 10, 10 
     @noLoop
 
 
 coffee_points = (point_list, delay_factor=0.3) ->
   (p5) ->
-    extend p5, (new points_minxin(point_list, p5.color(180, 0, 90)))
+    extend p5, (new stop_after_draw_p(
+      point_list,
+      p5.color(180, 0, 90)))
 
+
+class stop_after_draw_p_l extends stop_after_draw_p
+
+  constructor: (@point_list, @edge_list, @p_color) ->
+    super @point_list, @p_color
+
+  my_line: (ox, oy, nx, ny) ->
+    @stroke(200)
+    @strokeWeight(5);
+    @strokeCap(@ROUND);
+    @line ox, oy, nx, ny
+
+  setup: ->
+    @canvas_setup()
+    for [[x1, y1], [x2, y2]] in @edge_list
+      @my_ellipse x1, y1, 10, 10
+      @my_ellipse x2, y2, 10, 10
+      @my_line x1, (y1 - 1), x2, (y2 - 1)
+    @noLoop
 
 
 coffee_mst = (edge_list) ->
   (p5) -> 
+    extend p5, (new stop_after_draw_p_l(
+      [],
+      edge_list,
+      p5.color(180, 0, 90)))
 
-    p5.my_line = (ox, oy, nx, ny) ->
-      @fill 200
-      @stroke(200)
-      @strokeWeight(5);
-      @strokeCap(p5.ROUND);
-      @line ox, oy, nx, ny
-
-    p5.my_ellipse = (x, y, r1, r2, canvas_width=5) ->
-      @stroke(180, 0, 90)
-      @strokeWeight(canvas_width)
-      @ellipse x, y, r1, r2
-  
-    p5.setup = ->
-      @size canvas_width, canvas_height
-      @noStroke()
-      @background 125
-  
-      for edge in edge_list
-        for point in edge
-          @my_ellipse point[0], point[1], 10, 10
-        [[x1, y1], [x2, y2]] = edge
-        @my_line x1, (y1 - 1), x2, (y2 - 1)
-
-      @noLoop
 
 
 coffee_draw = (point_list, delay_factor=0.3) ->
