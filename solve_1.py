@@ -18,7 +18,7 @@ def lsum(l):
     return path_length
 
 
-def solve_1st(point_list, l_bottom):
+def unicursal_from_lb(point_list, l_bottom):
     '''
     point_list : [[0,0], [1,2], [3,4]...]
     l_bottom: [0,480]
@@ -36,7 +36,7 @@ def solve_1st(point_list, l_bottom):
         key=lsum,
         )
 
-def solve_2nd(point_list):
+def unicursal(point_list):
     '''
     point_list : [[0,0], [1,2], [3,4]...]
     '''
@@ -59,8 +59,8 @@ if __name__ == '__main__':
 
     print pl
    
-    print 'solve_1st:' 
-    print solve_1st(pl, (0, 0))
+    print 'unicursal_from_lb:' 
+    print unicursal_from_lb(pl, (0, 0))
 
-    print 'solve_2nd:' 
-    print solve_2nd(pl)
+    print 'unicursal:' 
+    print unicursal(pl)

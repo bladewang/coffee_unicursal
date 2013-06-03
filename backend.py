@@ -5,7 +5,7 @@ from json import dumps as json_dumps
 from json import loads as json_loads
 from solve_helper import gen_random_points
 
-from solve_1 import solve_1st, solve_2nd
+from solve_1 import unicursal_from_lb, unicursal
 import mst
 
 app = Flask(__name__)
@@ -48,7 +48,7 @@ def uri_solve_1st():
     try:
         plist = json_loads(request.form.get('data'))[:8]
         lbpos = json_loads(request.form.get('lb_pos'))
-        return json_dumps(solve_1st(plist, lbpos))
+        return json_dumps(unicursal_from_lb(plist, lbpos))
     except: #FIXME: fix type of except
         return erro_screen_points()
 
@@ -61,7 +61,7 @@ def uri_solve_2nd():
     '''
     try:
         plist = json_loads(request.form.get('data'))[:8]
-        return json_dumps(solve_2nd(plist))
+        return json_dumps(unicursal(plist))
     
     except: #FIXME: fix type of except
         erro_screen_points()
