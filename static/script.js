@@ -67,19 +67,19 @@ $ ->
     )
 
 
-w = parseInt $('#canvas_width').text()
-h = parseInt $('#canvas_height').text()
+canvas_width = parseInt $('#canvas_width').text()
+canvas_height = parseInt $('#canvas_height').text()
 
 coffee_points = (point_list, delay_factor=0.3) ->
   (p5) ->
 
-    p5.my_ellipse = (x, y, r1, r2, w=5) ->
+    p5.my_ellipse = (x, y, r1, r2, canvas_width=5) ->
       @stroke(180, 0, 90)
-      @strokeWeight(w)
+      @strokeWeight(canvas_width)
       @ellipse x, y, r1, r2
 
     p5.setup = ->
-      @size w, h
+      @size canvas_width, canvas_height
       @noStroke()
       @background 125
 
@@ -97,13 +97,13 @@ coffee_mst = (edge_list) ->
       @strokeCap(p5.ROUND);
       @line ox, oy, nx, ny
 
-    p5.my_ellipse = (x, y, r1, r2, w=5) ->
+    p5.my_ellipse = (x, y, r1, r2, canvas_width=5) ->
       @stroke(180, 0, 90)
-      @strokeWeight(w)
+      @strokeWeight(canvas_width)
       @ellipse x, y, r1, r2
   
     p5.setup = ->
-      @size w, h
+      @size canvas_width, canvas_height
       @noStroke()
       @background 125
   
@@ -130,9 +130,9 @@ coffee_draw = (point_list, delay_factor=0.3) ->
         Math.sqrt (
           pw((tp_x - x), 2) + pw((tp_y - y), 2)))
 
-    p5.my_ellipse = (x, y, r1, r2, w=5, p_color=@color(230, 0, 0)) ->
+    p5.my_ellipse = (x, y, r1, r2, canvas_width=5, p_color=@color(230, 0, 0)) ->
       @stroke(p_color)
-      @strokeWeight(w)
+      @strokeWeight(canvas_width)
       @ellipse x, y, r1, r2
 
     p5.my_line = (ox, oy, nx, ny) ->
@@ -143,7 +143,7 @@ coffee_draw = (point_list, delay_factor=0.3) ->
       @line ox, oy, nx, ny
 
     p5.setup = ->
-      @size w, h
+      @size canvas_width, canvas_height
       @noStroke()
       @background 125
 
