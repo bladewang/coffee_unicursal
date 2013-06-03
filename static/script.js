@@ -77,8 +77,9 @@ extend = (obj, mixin) ->
   obj
 
 
-class graph_canvas
-  constructor: (@p_color) ->
+class stop_after_draw_p 
+
+  constructor: (@point_list, @p_color) ->
 
   canvas_setup: ->
     @size canvas_width, canvas_height
@@ -89,12 +90,6 @@ class graph_canvas
     @stroke @p_color
     @strokeWeight wght
     @ellipse x, y, r1, r2
-
-
-class stop_after_draw_p extends graph_canvas
-
-  constructor: (@point_list, @p_color) ->
-    super @p_color
 
   setup: ->
     @canvas_setup()
