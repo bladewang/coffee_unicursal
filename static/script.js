@@ -70,21 +70,44 @@ $ ->
 canvas_width = parseInt $('#canvas_width').text()
 canvas_height = parseInt $('#canvas_height').text()
 
+
+extend = (obj, mixin) ->
+  for name, method of mixin
+    obj[name] = method
+  obj
+
+
+class graph_canvas
+  constructor: (@p_color) ->
+    @setup
+
+  setup:  ->
+    @size canvas_width, canvas_height
+    @noStroke
+    @background 125
+
+  my_ellipse: (x, y, r1, r2, wght=5) ->
+    @stroke @p_color
+    @strokeWeight wght
+    @ellipse x, y, r1, r2
+
+
+class points_minxin extends graph_canvas
+
+  constructor: (@point_list, @p_color) ->
+    super(@p_color)
+
+  setup: ->
+    super()
+
+    @my_ellipse point[0], point[1], 10, 10 for point in @point_list
+    @noLoop
+
+
 coffee_points = (point_list, delay_factor=0.3) ->
   (p5) ->
+    extend p5, (new points_minxin(point_list, p5.color(180, 0, 90)))
 
-    p5.my_ellipse = (x, y, r1, r2, canvas_width=5) ->
-      @stroke(180, 0, 90)
-      @strokeWeight(canvas_width)
-      @ellipse x, y, r1, r2
-
-    p5.setup = ->
-      @size canvas_width, canvas_height
-      @noStroke()
-      @background 125
-
-      @my_ellipse point[0], point[1], 10, 10 for point in point_list
-      @noLoop
 
 
 coffee_mst = (edge_list) ->
