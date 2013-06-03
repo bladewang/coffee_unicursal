@@ -133,66 +133,58 @@ coffee_mst = (edge_list) ->
       p5.color(180, 0, 90)))
 
 
+class path_animation extends stop_after_draw_p_l
+  constructor: (@point_list, @edge_list, @p_color, @delay_factor=0.3) ->
+    super @point_list, @edge_list, @p_color
+    @point_idx = 0
+    @_c_steps = 0
+    [@_cx, @_cy] = @point_list[0]
+    [@tp_x, @tp_y] = [@_cx, @_cy]
+
+  delay_to_p: (_cx, _cy, tp_x, tp_y) ->
+    pw = Math.pow
+    @delay_factor * parseInt(
+      Math.sqrt (
+        pw((tp_x - _cx), 2) + pw((tp_y - _cy), 2)))
+
+  setup: ->
+    $('input[type="button"]').attr 'disabled', true
+    @canvas_setup()
+    for [x, y] in @point_list
+      @my_ellipse x, y, 10, 10, 5, @color(180, 0, 90) 
+
+  draw: ->
+    while @_c_steps <= 0
+      if (@point_list.length - 1) is @point_idx
+        $('input[type="button"]').attr 'disabled', false
+        @noLoop
+
+      [@tp_x, @tp_y] = @point_list[@point_idx]
+      @my_ellipse @tp_x, @tp_y, 10, 10
+
+      @fill 0, 50, 200
+      @text "#{@point_idx}: (#{@tp_x}, #{@tp_y})", @_cx, @_cy
+
+      @point_idx += 1
+      [@tp_x, @tp_y] = @point_list[@point_idx]
+      @_c_steps = @delay_to_p(@_cx, @_cy, @tp_x, @tp_y) 
+
+    [od_x, od_y] = [@_cx, @_cy]
+    @_cx += (@tp_x - @_cx) / @_c_steps
+    @_cy += (@tp_y - @_cy) / @_c_steps
+
+    @_c_steps -= 1
+    
+    @my_line od_x, od_y, @_cx, @_cy
+
 
 coffee_draw = (point_list, delay_factor=0.3) ->
   (p5) ->
-    
-    point_idx = 0
-    _c_steps = 0
-    [_cx, _cy] = point_list[0]
-    [tp_x, tp_y] = [_cx, _cy]
+    extend p5, (new path_animation(
+        point_list,
+        [],
+        p5.color(180, 0, 90))) 
 
-    delay_to_p = (_cx, _cy, tp_x, tp_y) ->
-      pw = Math.pow
-      delay_factor * parseInt(
-        Math.sqrt (
-          pw((tp_x - _cx), 2) + pw((tp_y - _cy), 2)))
-
-    p5.my_ellipse = (_cx, _cy, r1, r2, canvas_width=5, p_color=@color(230, 0, 0)) ->
-      @stroke(p_color)
-      @strokeWeight(canvas_width)
-      @ellipse _cx, _cy, r1, r2
-
-    p5.my_line = (ox, oy, nx, ny) ->
-      @fill 200
-      @stroke(200)
-      @strokeWeight(5);
-      @strokeCap(p5.ROUND);
-      @line ox, oy, nx, ny
-
-    p5.setup = ->
-      @size canvas_width, canvas_height
-      @noStroke()
-      @background 125
-
-      $('input[type="button"]').attr 'disabled', true
-
-      for point in point_list
-        @my_ellipse point[0], point[1], 10, 10, 5, @color(180, 0, 90) 
-
-    p5.draw = ->
-
-      while _c_steps <= 0
-        if (point_list.length - 1) is point_idx
-          $('input[type="button"]').attr 'disabled', false
-
-        [tp_x, tp_y] = point_list[point_idx]
-        @my_ellipse tp_x, tp_y, 10, 10
-
-        @fill 0, 50, 200
-        @text "#{point_idx}: (#{tp_x}, #{tp_y})", _cx, _cy
-
-        point_idx += 1
-        [tp_x, tp_y] = point_list[point_idx]
-        _c_steps = delay_to_p(_cx, _cy, tp_x, tp_y) 
-
-      [od_x, od_y] = [_cx, _cy]
-      _cx += (tp_x - _cx) / _c_steps
-      _cy += (tp_y - _cy) / _c_steps
-
-      _c_steps -= 1
-      
-      @my_line od_x, od_y, _cx, _cy
 
 $(document).ready ->
   data_str = $('#data_str').val()
