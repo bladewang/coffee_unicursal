@@ -63,7 +63,7 @@ $ ->
       ,
       (data) -> 
         processing = new Processing($("#mycanvas")[0],
-          coffee_mst(JSON.parse(data)))
+          draw_mst(JSON.parse(data)))
     )
 
 
@@ -125,7 +125,7 @@ class stop_after_draw_p_l extends stop_after_draw_p
     @noLoop
 
 
-coffee_mst = (edge_list) ->
+draw_mst = (edge_list) ->
   (p5) -> 
     extend p5, (new stop_after_draw_p_l(
       [],
