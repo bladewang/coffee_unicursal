@@ -39,9 +39,6 @@ def solve_1st(point_list, l_bottom):
 def solve_2nd(point_list):
     '''
     point_list : [[0,0], [1,2], [3,4]...]
-    #FIXME:
-        [[69, 201], [100, 317], [111, 341], [149, 467], [177, 426], [403, 223], [387, 88], [270, 98]]
-        与MST的结果不一样啊。
     '''
     return min(
         path_permutations(point_list),
