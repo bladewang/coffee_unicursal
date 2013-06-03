@@ -17,14 +17,14 @@ $ ->
 
       clear
       processing = new Processing($("#mycanvas")[0], 
-        coffee_points(
+        just_draw_points(
           JSON.parse(data)))
 
   $('#btn_reset_data').on 'click', ->
     $('#data_str').val $('#data_str_backup').text()
     data_str = $('#data_str').val()
     processing = new Processing($("#mycanvas")[0], 
-      coffee_points(
+      just_draw_points(
         JSON.parse(data_str)))
 
   $('#btn_solve_1').on 'click', ->
@@ -37,7 +37,7 @@ $ ->
       ,
       (data) ->
         $('#data_str').val(data)
-        processing = new Processing($("#mycanvas")[0], coffee_points( JSON.parse(data)))
+        processing = new Processing($("#mycanvas")[0], just_draw_points( JSON.parse(data)))
         $('#btn').attr 'disabled', false
     )
     $('#btn').attr 'disabled', true
@@ -50,7 +50,7 @@ $ ->
       ,
       (data) ->
         $('#data_str').val(data)
-        processing = new Processing($("#mycanvas")[0], coffee_points( JSON.parse(data)))
+        processing = new Processing($("#mycanvas")[0], just_draw_points( JSON.parse(data)))
         $('#btn').attr 'disabled', false
     )
     $('#btn').attr 'disabled', true
@@ -98,7 +98,7 @@ class stop_after_draw_p
     @noLoop
 
 
-coffee_points = (point_list, delay_factor=0.3) ->
+just_draw_points = (point_list, delay_factor=0.3) ->
   (p5) ->
     extend p5, (new stop_after_draw_p(
       point_list,
@@ -189,6 +189,6 @@ path_animation_creator = (point_list, delay_factor=0.3) ->
 $(document).ready ->
   data_str = $('#data_str').val()
   processing = new Processing($("#mycanvas")[0], 
-    coffee_points(
+    just_draw_points(
       JSON.parse(data_str)))
 
