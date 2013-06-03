@@ -139,19 +139,19 @@ coffee_draw = (point_list, delay_factor=0.3) ->
     
     point_idx = 0
     delay = 0
-    [x, y] = point_list[0]
-    [tp_x, tp_y] = [x, y]
+    [_cx, _cy] = point_list[0]
+    [tp_x, tp_y] = [_cx, _cy]
 
-    delay_to_p = (x, y, tp_x, tp_y) ->
+    delay_to_p = (_cx, _cy, tp_x, tp_y) ->
       pw = Math.pow
       delay_factor * parseInt(
         Math.sqrt (
-          pw((tp_x - x), 2) + pw((tp_y - y), 2)))
+          pw((tp_x - _cx), 2) + pw((tp_y - _cy), 2)))
 
-    p5.my_ellipse = (x, y, r1, r2, canvas_width=5, p_color=@color(230, 0, 0)) ->
+    p5.my_ellipse = (_cx, _cy, r1, r2, canvas_width=5, p_color=@color(230, 0, 0)) ->
       @stroke(p_color)
       @strokeWeight(canvas_width)
-      @ellipse x, y, r1, r2
+      @ellipse _cx, _cy, r1, r2
 
     p5.my_line = (ox, oy, nx, ny) ->
       @fill 200
@@ -180,19 +180,19 @@ coffee_draw = (point_list, delay_factor=0.3) ->
         @my_ellipse tp_x, tp_y, 10, 10
 
         @fill 0, 50, 200
-        @text "#{point_idx}: (#{tp_x}, #{tp_y})", x, y
+        @text "#{point_idx}: (#{tp_x}, #{tp_y})", _cx, _cy
 
         point_idx += 1
         [tp_x, tp_y] = point_list[point_idx]
-        delay = delay_to_p(x, y, tp_x, tp_y) 
+        delay = delay_to_p(_cx, _cy, tp_x, tp_y) 
 
-      [od_x, od_y] = [x, y]
-      x += (tp_x - x) / delay
-      y += (tp_y - y) / delay
+      [od_x, od_y] = [_cx, _cy]
+      _cx += (tp_x - _cx) / delay
+      _cy += (tp_y - _cy) / delay
 
       delay -= 1
       
-      @my_line od_x, od_y, x, y
+      @my_line od_x, od_y, _cx, _cy
 
 $(document).ready ->
   data_str = $('#data_str').val()
