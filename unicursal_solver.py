@@ -2,8 +2,18 @@
 
 from math import sqrt
 
-from solve_helper import gen_random_points, path_permutations
 from itertools import ifilter
+from itertools import permutations
+from random import randrange
+
+def gen_random_points(width=100, height=100, points_count=1):
+    return  [
+        (randrange(width), randrange(height))
+        for x in xrange(points_count)
+        ]
+
+def path_permutations(points_list):
+    return permutations(points_list)
 
 
 def lsum(l):
@@ -59,9 +69,9 @@ def solve_by_mst(mst, prim_point=None):
 
 if __name__ == '__main__':
 
+    print 'permutations for 9 random points path:'
     pl = gen_random_points(100, 100, 9)
-
-    print pl
+    print tuple(pl)
    
     print 'unicursal_from_lb:' 
     print unicursal_from_lb(pl, (0, 0))

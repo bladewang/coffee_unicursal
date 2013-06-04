@@ -3,9 +3,9 @@
 from flask import Flask, render_template, request
 from json import dumps as json_dumps
 from json import loads as json_loads
-from solve_helper import gen_random_points
 
-from solve_1 import unicursal_from_lb, unicursal
+from unicursal_solver import gen_random_points
+from unicursal_solver import unicursal_from_lb, unicursal
 import mst
 
 app = Flask(__name__)
