@@ -32,7 +32,7 @@ def erro_screen_points():
 
 
 @app.route('/')
-def hello_world():
+def index():
     return render_template('index.html',
         canv_width=480,
         canv_height=480,
