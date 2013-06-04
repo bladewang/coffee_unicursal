@@ -200,7 +200,6 @@ welcome_animation_creator = (point_list) ->
         p5.color(230, 0, 0),
         0.15,
         ->
-          console.log "bye"
           clear()
           gen_rand_points())) 
 
