@@ -162,7 +162,7 @@ class path_animation extends stop_after_draw_p_l
     while @_c_steps <= 0
       if (@point_list.length - 1) is @point_idx
         $('input[type="button"]').attr 'disabled', false
-        if @after? then @after
+        if @after? then @after()
 
       [@tp_x, @tp_y] = @point_list[@point_idx]
       @my_ellipse @tp_x, @tp_y, 10, 10
