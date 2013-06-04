@@ -1,7 +1,6 @@
-coffee_unicursal
-================
+* coffee_unicursal
 
-一个小玩具
+** 一个小玩具
 
 使用 CoffeScript，Processing.js 和 Python 一起演示一个推销员问题的变型。
 
@@ -12,5 +11,10 @@ coffee_unicursal
 可以在这里看一下效果。
 http://mongopark.com:5000/
 
+** TODO
+
+1. 更好的算法
+2. 用Coffee Script 写直接跑在前端的求解。
+3. 更友好的界面
 
 
