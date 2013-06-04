@@ -126,7 +126,7 @@ class stop_after_draw_p_l extends stop_after_draw_p
     for [[x1, y1], [x2, y2]] in @edge_list
       @my_ellipse x1, y1, 10, 10
       @my_ellipse x2, y2, 10, 10
-      @my_line x1, (y1 - 1), x2, (y2 - 1)
+      @my_line x1, y1, x2, y2
     @noLoop
 
 
@@ -139,7 +139,7 @@ draw_mst = (edge_list) ->
 
 
 class path_animation extends stop_after_draw_p_l
-  constructor: (@point_list, @edge_list, @p_color, @delay_factor=0.3) ->
+  constructor: (@point_list, @edge_list, @p_color, @delay_factor=0.3, @after) ->
     super @point_list, @edge_list, @p_color
     @point_idx = 0
     @_c_steps = 0
@@ -162,7 +162,7 @@ class path_animation extends stop_after_draw_p_l
     while @_c_steps <= 0
       if (@point_list.length - 1) is @point_idx
         $('input[type="button"]').attr 'disabled', false
-        @noLoop
+        if @after? then @after
 
       [@tp_x, @tp_y] = @point_list[@point_idx]
       @my_ellipse @tp_x, @tp_y, 10, 10
@@ -183,15 +183,29 @@ class path_animation extends stop_after_draw_p_l
     @my_line od_x, od_y, @_cx, @_cy
 
 
-path_animation_creator = (point_list, delay_factor=0.3) ->
+path_animation_creator = (point_list) ->
   (p5) ->
     extend p5, (new path_animation(
         point_list,
         [],
-        p5.color(230, 0, 0))) 
+        p5.color(230, 0, 0)
+        0.12)) 
+
+
+welcome_animation_creator = (point_list) ->
+  (p5) ->
+    extend p5, (new path_animation(
+        point_list,
+        [],
+        p5.color(230, 0, 0),
+        0.15,
+        ->
+          console.log "bye"
+          clear()
+          gen_rand_points())) 
 
 
 $(document).ready ->
   data_str = $('#data_str').val()
-  p_by_data path_animation_creator, JSON.parse(data_str)
+  p_by_data welcome_animation_creator, JSON.parse(data_str)
   gen_rand_points
