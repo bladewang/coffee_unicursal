@@ -3,6 +3,7 @@
 from math import sqrt
 
 from solve_helper import gen_random_points, path_permutations
+from itertools import ifilter
 
 
 def lsum(l):
@@ -25,14 +26,17 @@ def unicursal_from_lb(point_list, l_bottom):
     '''
     lbx, lby = l_bottom
 
-    new_list_head = min(
+    first_point = min(
         point_list,
         key=lambda (x, y): 
             sqrt((x - lbx) ** 2 + (y - lby) ** 2)
         )
-    point_list.remove(new_list_head)
-    return (new_list_head,) + min(
-        path_permutations(point_list),
+
+    return min(
+        ifilter(
+            lambda pth:
+                pth[0] == first_point,
+            path_permutations(point_list)),
         key=lsum,
         )
 
