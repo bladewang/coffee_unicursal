@@ -103,7 +103,7 @@ class stop_after_draw_p
     @noLoop
 
 
-just_draw_points = (point_list, delay_factor=0.2) ->
+just_draw_points = (point_list) ->
   (p5) ->
     extend p5, (new stop_after_draw_p(
       point_list,
