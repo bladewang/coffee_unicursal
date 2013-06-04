@@ -1,29 +1,37 @@
 
+clear = ->
+  delete processing 
+  $('#mycanvas').remove()
+  $('body').prepend('<canvas id="mycanvas"></canvas>')
+
 p_by_data = (p_gen, dat) ->
   new Processing($("#mycanvas")[0], p_gen(dat))
 
+gen_rand_points = ->
+  $.get '/rand_points/480/480/8', (data)->
+    $('#data_str').val(data)
+    $('#data_str_backup').text(data)
+    clear
+    p_by_data just_draw_points, JSON.parse(data)
+
 $ ->
-  clear = ->
-    delete processing 
-    $('#mycanvas').remove()
-    $('body').prepend('<canvas id="mycanvas"></canvas>')
 
   $('#btn').on 'click', ->
     data_str = $('#data_str').val()
     clear
-    processing = p_by_data path_animation_creator, JSON.parse(data_str)
+    p_by_data path_animation_creator, JSON.parse(data_str)
   
   $('#btn_gen_points').on 'click', ->
     $.get '/rand_points/480/480/8', (data)->
       $('#data_str').val(data)
       $('#data_str_backup').text(data)
       clear
-      processing = p_by_data just_draw_points, JSON.parse(data)
+      p_by_data just_draw_points, JSON.parse(data)
 
   $('#btn_reset_data').on 'click', ->
     $('#data_str').val $('#data_str_backup').text()
     data_str = $('#data_str').val()
-    processing = p_by_data just_draw_points, JSON.parse(data_str)
+    p_by_data just_draw_points, JSON.parse(data_str)
 
   $('#btn_solve_1').on 'click', ->
     $.post(
@@ -35,7 +43,7 @@ $ ->
       ,
       (data) ->
         $('#data_str').val(data)
-        processing = p_by_data just_draw_points, JSON.parse(data)
+        p_by_data path_animation_creator, JSON.parse(data)
         $('#btn').attr 'disabled', false
     )
     $('#btn').attr 'disabled', true
@@ -48,7 +56,7 @@ $ ->
       ,
       (data) ->
         $('#data_str').val(data)
-        processing = p_by_data just_draw_points, JSON.parse(data)
+        p_by_data path_animation_creator, JSON.parse(data)
         $('#btn').attr 'disabled', false
     )
     $('#btn').attr 'disabled', true
@@ -60,7 +68,7 @@ $ ->
         $('#data_str').val()
       ,
       (data) -> 
-        processing = p_by_data draw_mst, JSON.parse(data)
+        p_by_data draw_mst, JSON.parse(data)
     )
 
 
@@ -185,5 +193,5 @@ path_animation_creator = (point_list, delay_factor=0.3) ->
 
 $(document).ready ->
   data_str = $('#data_str').val()
-  processing = p_by_data just_draw_points, JSON.parse(data_str)
-
+  p_by_data path_animation_creator, JSON.parse(data_str)
+  gen_rand_points
