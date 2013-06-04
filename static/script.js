@@ -207,4 +207,3 @@ welcome_animation_creator = (point_list) ->
 $(document).ready ->
   data_str = $('#data_str').val()
   p_by_data welcome_animation_creator, JSON.parse(data_str)
-  gen_rand_points
