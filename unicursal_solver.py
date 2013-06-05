@@ -12,9 +12,6 @@ def gen_random_points(width=100, height=100, points_count=1):
         for x in xrange(points_count)
         ]
 
-def path_permutations(points_list):
-    return permutations(points_list)
-
 
 def lsum(l):
     path_length = 0
@@ -46,7 +43,7 @@ def unicursal_from_lb(point_list, l_bottom):
         ifilter(
             lambda pth:
                 pth[0] == first_point,
-            path_permutations(point_list)),
+            permutations(point_list)),
         key=lsum,
         )
 
@@ -55,7 +52,7 @@ def unicursal(point_list):
     point_list : [[0,0], [1,2], [3,4]...]
     '''
     return min(
-        path_permutations(point_list),
+        permutations(point_list),
         key=lsum,
         )
 
