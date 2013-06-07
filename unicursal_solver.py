@@ -73,6 +73,50 @@ def solve_by_random_guess(point_list, times=1000):
     return best_path
     
 
+def solve_by_annealing(point_list, T=10000, cool=0.95, step=1, freezed=0.1):
+    '''
+    P = e ** (- (nv - ov) / T)
+    costf = lsum
+    '''
+
+    shuffle(point_list)
+
+    best_path = point_list
+    best_cost = lsum(best_path)
+
+    new_path = None
+    new_cost = None
+
+    def remold():
+        new_path = best_path[:]
+        idx = randrange(0, len(new_path))
+        offset = randint(-step, step)
+        nidx = idx + offset
+        if nidx < 0:
+            nidx = 0
+        if nidx >= len(new_path):
+            nidx = len(new_path) - 1
+
+        new_path[idx], new_path[nidx] = new_path[nidx], new_path[idx] 
+        return new_path
+
+    def P():
+        return (e ** (- (new_cost - best_cost) / T))
+
+    while freezed < T:
+        new_path = remold()
+        new_cost = lsum(new_path)
+        #print new_cost, best_cost, T
+        if new_cost < best_cost or random() < P():  #fixme
+            best_path = new_path
+            best_cost = new_cost
+        else:
+            pass
+        T *= cool
+
+    return best_path
+
+
 def solve_by_mst(mst, prim_point=None):
     if prim_point:
         pass
@@ -102,3 +146,7 @@ if __name__ == '__main__':
     print '%.3f' % lsum(ul)
     print
 
+    print 'anneal:' 
+    ul = solve_by_annealing(pl, T=1000000, cool=0.99, step=3)
+    print '%.3f' % lsum(ul)
+    print

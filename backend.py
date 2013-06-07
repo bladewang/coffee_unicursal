@@ -6,6 +6,7 @@ from json import loads as json_loads
 
 from unicursal_solver import gen_random_points
 from unicursal_solver import unicursal_from_lb, unicursal
+from unicursal_solver import solve_by_annealing
 import mst
 
 app = Flask(__name__)
@@ -59,9 +60,13 @@ def uri_solve_2nd():
     >>> data_str 
     [[0,0], [1,2], [3,4] ...]
     '''
+    plist = json_loads(request.form.get('data'))
     try:
-        plist = json_loads(request.form.get('data'))[:8]
-        return json_dumps(unicursal(plist))
+        if len(plist) < 9:
+            return json_dumps(unicursal(plist))
+        else:
+            return json_dumps(
+                solve_by_annealing(plist, T=1000000, cool=0.999, step=2))
     
     except: #FIXME: fix type of except
         erro_screen_points()
@@ -84,4 +89,4 @@ def rand_points(width=100, height=100, count=8):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)
