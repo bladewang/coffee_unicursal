@@ -1,10 +1,10 @@
 # coding: utf-8
 
-from math import sqrt
+from math import sqrt, e
 
 from itertools import ifilter
 from itertools import permutations
-from random import randrange
+from random import randrange, random, randint, shuffle
 
 def gen_random_points(width=100, height=100, points_count=1):
     return  [
@@ -56,6 +56,23 @@ def unicursal(point_list):
         key=lsum,
         )
 
+
+def solve_by_random_guess(point_list, times=1000):
+    best_path = point_list
+    best_cost = lsum(point_list)
+
+    for i in xrange(times):
+        new_path = best_path[:]
+        shuffle(new_path)
+        new_cost = lsum(new_path)
+        
+        if new_cost < best_cost:
+            best_path = new_path
+            best_cost = new_cost
+
+    return best_path
+    
+
 def solve_by_mst(mst, prim_point=None):
     if prim_point:
         pass
@@ -66,12 +83,22 @@ def solve_by_mst(mst, prim_point=None):
 
 if __name__ == '__main__':
 
-    print 'permutations for 9 random points path:'
-    pl = gen_random_points(100, 100, 9)
+    n = 90
+    print 'permutations for %d random points path:' % n
+    pl = gen_random_points(100, 100, n)
     print tuple(pl)
+    print
+    print '%.3f' % lsum(pl)
+    print
    
-    print 'unicursal_from_lb:' 
-    print unicursal_from_lb(pl, (0, 0))
+    if len(pl) < 10:
+        print 'unicursal:' 
+        ul = unicursal(pl)
+        print '%.3f' % lsum(ul)
+        print
 
-    print 'unicursal:' 
-    print unicursal(pl)
+    print 'random optimize:' 
+    ul = solve_by_random_guess(pl)
+    print '%.3f' % lsum(ul)
+    print
+
