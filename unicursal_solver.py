@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from math import sqrt, e
+from math import sqrt, exp
 
 from itertools import ifilter
 from itertools import permutations
@@ -101,7 +101,7 @@ def solve_by_annealing(point_list, T=10000, cool=0.95, step=1, freezed=0.1):
         return new_path
 
     def P():
-        return (e ** (- (new_cost - best_cost) / T))
+        return exp(- (new_cost - best_cost) / T)
 
     while freezed < T:
         new_path = remold()
