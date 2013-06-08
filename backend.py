@@ -66,7 +66,7 @@ def uri_solve_2nd():
             return json_dumps(unicursal(plist))
         else:
             return json_dumps(
-                solve_by_annealing(plist, T=1000000, cool=0.999, step=2))
+                solve_by_annealing(plist, T=1000000, cool=0.999, step=len(plist)))
     
     except: #FIXME: fix type of except
         erro_screen_points()
