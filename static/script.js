@@ -8,7 +8,7 @@ p_by_data = (p_gen, dat) ->
   new Processing($("#mycanvas")[0], p_gen(dat))
 
 gen_rand_points = ->
-  $.get '/rand_points/480/480/8', (data)->
+  $.get '/rand_points/480/480/20', (data)->
     $('#data_str').val(data)
     $('#data_str_backup').text(data)
     clear
@@ -22,7 +22,7 @@ $ ->
     p_by_data path_animation_creator, JSON.parse(data_str)
   
   $('#btn_gen_points').on 'click', ->
-    $.get '/rand_points/480/480/8', (data)->
+    $.get '/rand_points/480/480/20', (data)->
       $('#data_str').val(data)
       $('#data_str_backup').text(data)
       clear

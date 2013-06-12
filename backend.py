@@ -6,7 +6,7 @@ from json import loads as json_loads
 
 from unicursal_solver import gen_random_points
 from unicursal_solver import unicursal_from_lb, unicursal
-from unicursal_solver import solve_by_annealing
+from unicursal_solver import solve_by_annealing, rotate_path
 import mst
 
 app = Flask(__name__)
@@ -66,7 +66,9 @@ def uri_solve_2nd():
             return json_dumps(unicursal(plist))
         else:
             return json_dumps(
-                solve_by_annealing(plist, T=1000000, cool=0.999, step=len(plist)))
+                rotate_path(
+                    solve_by_annealing(
+                        plist, T=1000000, cool=0.999, step=len(plist))))
     
     except: #FIXME: fix type of except
         erro_screen_points()
