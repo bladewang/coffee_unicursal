@@ -79,9 +79,8 @@ def solve_by_annealing(point_list, T=10000, cool=0.95, step=1, freezed=0.1):
     costf = lsum
     '''
 
-    shuffle(point_list)
-
-    best_path = point_list
+    best_path = point_list[:]
+    shuffle(best_path)
     best_cost = lsum(best_path)
 
     new_path = None
@@ -125,6 +124,20 @@ def solve_by_mst(mst, prim_point=None):
     return []
 
 
+def rotate_path(pl):
+    '''
+    rotate to delete the longest edge
+    '''
+
+    i, _ = max(
+        enumerate(map(
+            lsum,
+            zip(pl, pl[-1:] + pl[:-1]))),
+        key=lambda (a, b): b)
+
+    return pl[i: ] + pl[: i]
+
+
 if __name__ == '__main__':
 
     n = 90
@@ -147,6 +160,10 @@ if __name__ == '__main__':
     print
 
     print 'anneal:' 
-    ul = solve_by_annealing(pl, T=1000000, cool=0.99, step=3)
+    ul = solve_by_annealing(pl, T=1000000, cool=0.999, step=len(pl))
     print '%.3f' % lsum(ul)
     print
+
+    print 'after rotate:'
+    print lsum(rotate_path(ul))
+
