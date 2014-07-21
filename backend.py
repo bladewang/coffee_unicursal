@@ -47,7 +47,7 @@ def uri_solve_1st():
     [[0,0], [1,2], [3,4] ...]
     '''
     try:
-        plist = json_loads(request.form.get('data'))[:8]
+        plist = json_loads(request.form.get('data'))
         lbpos = json_loads(request.form.get('lb_pos'))
         return json_dumps(unicursal_from_lb(plist, lbpos))
     except: #FIXME: fix type of except
