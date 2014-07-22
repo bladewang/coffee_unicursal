@@ -9,7 +9,7 @@
 
 
 可以在这里看一下效果。
-http://mongopark.com:5000/
+http://yy42.in:5000/
 
 ## TODO
 
