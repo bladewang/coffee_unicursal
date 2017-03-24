@@ -15,14 +15,11 @@ def gen_random_points(width=100, height=100, points_count=1):
 
 def lsum(l):
     path_length = 0
-    last_point = None
-    for (nx, ny) in l:
-        if last_point:
-            (ox, oy) = last_point
-            path_length += sqrt((nx - ox) ** 2 + (ny - oy) ** 2)
-        else:
-            pass
-        last_point = (nx, ny)
+
+    for (i, (nx, ny)) in enumerate(l):
+        (ox, oy) = l[(i-1) % len(l)]
+        path_length += sqrt((nx - ox) ** 2 + (ny - oy) ** 2)
+
     return path_length
 
 
@@ -90,11 +87,7 @@ def solve_by_annealing(point_list, T=10000, cool=0.95, step=1, freezed=0.1):
         new_path = best_path[:]
         idx = randrange(0, len(new_path))
         offset = randint(-step, step)
-        nidx = idx + offset
-        if nidx < 0:
-            nidx = 0
-        if nidx >= len(new_path):
-            nidx = len(new_path) - 1
+        nidx = (idx + offset) % len(new_path)
 
         new_path[idx], new_path[nidx] = new_path[nidx], new_path[idx] 
         return new_path
@@ -106,7 +99,7 @@ def solve_by_annealing(point_list, T=10000, cool=0.95, step=1, freezed=0.1):
         new_path = remold()
         new_cost = lsum(new_path)
         #print new_cost, best_cost, T
-        if new_cost < best_cost or random() < P():  #fixme
+        if new_cost < best_cost or random() < P():  #fixme ...?
             best_path = new_path
             best_cost = new_cost
         else:
